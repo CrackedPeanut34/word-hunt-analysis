@@ -33,6 +33,19 @@ Checked the status-bar clock across both datasets to see if real play-time data 
 - Same hand-rolled Newton-Raphson/IRLS logistic regression as before (standardized features per training fold, small ridge penalty for stability), plus the linear-regression-thresholded version for comparison, both run with and without the opponent feature.
 - Overall out-of-fold accuracy: 67.07% (logistic, no opponent feature) → **70.66%** (logistic, with opponent feature) → beats the pooled baseline of 55.09% by 12–16 points depending on version. Linear regression version came in slightly weaker across the board and produced more invalid (outside [0,1]) predictions when the opponent feature was added (7 of 167) — one more mark in favor of logistic regression as the right tool.
 
+## 6. Front-end predictor tool, and a follow-up fix (dropping `my_score` as a model input)
+
+Built a live win-probability calculator (a published artifact) around the pooled logistic model, taking score/words/tier counts as input. Testing it surfaced a real problem: holding score fixed and varying word count produced **non-monotonic, occasionally backwards predictions** (e.g. more score at a fixed word count sometimes *lowered* the predicted win chance). Root cause: `my_score`, `my_words`, and `my_avg_word_value` aren't independent (`score = words × avg_word_value` by definition), and including all three as separate regression inputs let the fit distribute credit between them in an unstable, occasionally sign-flipped way — a sharper, concrete symptom of the multicollinearity flagged as a caveat ever since the very first logistic regression.
+
+**Fix:** refit both pooled models (with and without the opponent feature) dropping `my_score` entirely, keeping `my_words`, `my_words_over_800`, `my_words_over_1400`, and `my_avg_word_value` — same 5-fold CV, same fold assignment as the original run, for a clean before/after:
+
+| | With score (original) | **Without score (fixed)** |
+|---|---|---|
+| No opponent feature — out-of-fold accuracy | 67.07% | **67.66%** |
+| With opponent feature — out-of-fold accuracy | 70.66% | **69.46%** |
+
+Accuracy is a wash (within a point either way — small-sample noise, not a real difference), but the coefficients are now all correctly signed and positive, and a spot-check (score fixed at 15,000, words swept 15→50) confirmed the predictions are monotonic and sane again instead of dipping and recovering. The front-end tool's input fields didn't change — it still asks for score, since that's what's visible on screen — only the math dropped the redundant term. New coefficient files: `word_hunt_win_logistic_cv_coefficients_noscore_no_opp.csv`, `_noscore_with_opp.csv`, `word_hunt_win_logistic_cv_metrics_noscore.csv`.
+
 ## Published to GitHub
 
 The analysis (CSVs + markdown docs, not the raw screenshots — those stay local) is published at **https://github.com/CrackedPeanut34/word-hunt-analysis** (public repo).
