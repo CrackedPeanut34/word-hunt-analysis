@@ -4,6 +4,8 @@ Source: `word_hunt_data_enriched.csv` (116 games, IMG_5712–IMG_5827)
 
 **The throughline of this whole project turned out to be one derived stat: `avg_word_value` (score ÷ words) — points per word found, not raw score and not raw word count.** Every later analysis (correlation ranking, win-rate splits, the win-prediction models, and the second dataset comparison) kept landing back on this same number as the strongest single signal for winning. See `word_hunt_insights.md` for the full case, and the [Word Value Differential Distribution](https://claude.ai/code/artifact/6034b8ee-69da-403b-9e31-eeee4251e05a) chart for the picture of it.
 
+**2026-08-04 correction note:** a `words_over_1800` tier (previously silently folded into ≥1400) was audited in and backfilled across every CSV. It doesn't change anything below. Full audit in `word_hunt_process_log_combined.md` § 0.
+
 ## Record
 - **Win %:** 39.66% (40.00% excluding the one draw)
 - **Record:** 46 W – 69 L – 1 D

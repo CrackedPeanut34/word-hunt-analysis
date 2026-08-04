@@ -2,6 +2,8 @@
 
 51 games (IMG_5828–IMG_5878). 29 wins, 22 losses, 0 draws. Win rate **56.86%** — a completely different picture from dataset 1's 39.66%. Every finding below is stated fresh, with the dataset 1 number alongside it for comparison.
 
+**2026-08-04 correction note:** a `words_over_1800` tier (previously silently folded into ≥1400) was audited in and backfilled across every CSV. It doesn't change anything below — the ≥800/≥1400/≥2200 numbers here were already correct — but it does sharpen the points-origin analysis in `word_hunt_insights_combined.md`, which is worth a look.
+
 ## The headline: opponent 2's word value is much closer to yours than opponent 1's was
 
 The single biggest difference between the two datasets: your average word value (points per word found) is nearly **tied** with opponent 2's — 300.96 vs. 302.38, a gap of just −1.42 points. In dataset 1, your avg word value trailed the opponent's by −44.13 points, a real and consistent gap. That one number swing largely explains everything else that changed: your average score differential flipped from **−975.86 (behind)** in dataset 1 to **+639.22 (ahead)** in dataset 2, and your win rate jumped from 39.66% to 56.86%.

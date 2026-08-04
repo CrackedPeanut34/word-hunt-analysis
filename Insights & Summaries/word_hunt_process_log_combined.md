@@ -2,6 +2,18 @@
 
 Everything done that spans both datasets at once, rather than treating them separately.
 
+## 0. Correction (2026-08-04): the missing 1800-point tier
+
+The original extraction tracked point values as cumulative thresholds only (≥800, ≥1400, ≥2200) — a word worth 1800 was correctly counted toward both the ≥800 and ≥1400 tallies, but there was no dedicated ≥1800 tier, so an 1800 was indistinguishable from a 1400 in the data. Six games had been informally flagged with a note during the original extraction when an 1800 happened to be noticed, but nothing had systematically checked for it everywhere it could occur.
+
+**Audit method:** Only games where `my_words_over_1400 > 0` OR `opponent_words_over_1400 > 0` can possibly contain an 1800 (if that count is 0, there's nothing above 1400 to find). That filtered 167 games down to **87 that needed re-checking** — also confirmed the max count in that tier is 7, well under the 15-word display cap, so every relevant word is guaranteed visible in the original screenshot (no truncation risk for this check). Split the 87 into 6 parallel batches, each re-reading its assigned screenshots and reporting the exact count of 1400/1800/2200-point words per side, cross-checked against the already-known ≥1400 and ≥2200 totals.
+
+**Verification:**
+- Automated: every batch's reported (1400 + 1800 + 2200) count matched the previously-known ≥1400 total exactly, and every reported 2200 count matched the previously-known ≥2200 total exactly — zero discrepancies across all 87 games.
+- Manual: directly re-read a sample of the newly-discovered (previously unflagged) 1800s — including both instances on my own side (IMG_5785, IMG_5848) — against the source screenshots. All matched.
+
+**Result:** found 17 of 167 games with at least one ≥1800 word (2 on my side, 19 word-instances on the opponent side across both datasets — some games had more than one). Added `words_over_1800` (mine and opponent's) plus `words_over_1800_diff` to every base, enriched, and summary CSV in the project. Recomputed the points-origin decomposition (see `word_hunt_insights_combined.md`) **exactly** instead of approximating every ≥1400 word as worth 1400 — reconstruction error against the real score differential is now precisely 0, versus a small systematic undercount before. Confirmed via cross-validation that this changes nothing about the win-prediction models (same features, same values, byte-identical accuracy) and that adding the new tier as its own feature doesn't help (too rare — 2 occurrences in 167 games), so the front-end predictor tool needed no changes.
+
 ## 1. Combined dataset (`word_hunt_data_combined.csv`)
 
 Concatenated `word_hunt_data_enriched.csv` (116 games, Opponent 1) and `word_hunt_data_enriched2.csv` (51 games, Opponent 2) into one 167-row table. Unified the opponent-specific column names (`opp_*` / `opp2_*` → generic `opponent_*`) and added:

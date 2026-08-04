@@ -9,8 +9,11 @@ my_words,0.419,0.00219
 my_score,0.413,0.00256
 my_words_over_800,0.38,0.00599
 opp2_avg_word_value,-0.301,0.03198
+opp2_words_over_1800,-0.265,0.06064
 my_avg_word_value,0.262,0.06283
+words_over_1800_diff,0.227,0.10874
 opp2_score,-0.17,0.23276
 opp2_words_over_800,-0.169,0.23608
+my_words_over_1800,-0.162,0.25496
 opp2_words,0.064,0.65569
 my_words_over_1400,-0.029,0.83818

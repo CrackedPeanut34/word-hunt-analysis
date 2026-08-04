@@ -2,6 +2,8 @@
 
 116 games. 46 wins, 69 losses, 1 draw. Win rate 39.66% (40.0% if you don't count the draw).
 
+**2026-08-04 correction note:** a `words_over_1800` tier (previously silently folded into ≥1400) was audited in and backfilled across every CSV. It doesn't change anything below — the ≥800/≥1400/≥2200 numbers here were already correct — but it does sharpen the points-origin analysis in `word_hunt_insights_combined.md`, which is worth a look.
+
 ## The headline finding
 
 **Word value matters far more than word count.** When your average point-value-per-word beats your opponent's, you win 87.5% of the time (28 of 32 games). When it's worse, you win only 21.4% of the time (18 of 84 games). Bucketed into finer bands, it's almost a clean step function — win rate climbs from 0% to 100% as your word-value edge crosses zero:

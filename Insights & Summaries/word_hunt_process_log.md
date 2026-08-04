@@ -2,6 +2,8 @@
 
 What was done, start to finish, across this whole project.
 
+**2026-08-04 correction note:** a `words_over_1800` column was added retroactively to every CSV referenced below (base, enriched, and summary alike) after auditing all 87 games with any ≥1400 word. Full audit method and impact in `word_hunt_process_log_combined.md` § 0 and `word_hunt_insights_combined.md`. Nothing else in this document changed — the cumulative ≥800/≥1400/≥2200 counts below were already correct and remain so.
+
 ## 1. Data extraction (screenshots → CSV)
 
 **Source:** 116 iPhone screenshots of Word Hunt (a GamePigeon game) post-game results screens, named IMG_5712.PNG through IMG_5827.PNG, in `/Users/levi/Desktop/Word Hunt/`.

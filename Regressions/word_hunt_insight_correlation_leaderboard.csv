@@ -13,4 +13,7 @@ opp_words_over_800,-0.258,0.00519
 my_avg_word_value,0.243,0.00853
 opp_score,-0.237,0.0104
 my_words_over_1400,0.216,0.02007
+words_over_1800_diff,0.2,0.03157
+opp_words_over_1800,-0.182,0.05083
+my_words_over_1800,0.115,0.21884
 opp_words,-0.06,0.52224

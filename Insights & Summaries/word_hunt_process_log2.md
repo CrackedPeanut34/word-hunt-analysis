@@ -2,6 +2,8 @@
 
 Everything done to bring in the second batch of raw data and run the full pipeline from dataset 1 against it.
 
+**2026-08-04 correction note:** a `words_over_1800` column was added retroactively to every CSV referenced below after auditing all games with any ≥1400 word. Full audit method and impact in `word_hunt_process_log_combined.md` § 0 and `word_hunt_insights_combined.md`. Nothing else here changed — the cumulative ≥800/≥1400/≥2200 counts were already correct.
+
 ## 1. Data extraction (screenshots → CSV)
 
 **Source:** 51 new screenshots, IMG_5828.PNG through IMG_5878.PNG, same folder, same game (Word Hunt), same screen layout as dataset 1 — but this is a different opponent, labeled **"opponent 2" / `opp2`** throughout instead of `opp`.
