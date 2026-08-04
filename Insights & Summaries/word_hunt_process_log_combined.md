@@ -33,6 +33,10 @@ Checked the status-bar clock across both datasets to see if real play-time data 
 - Same hand-rolled Newton-Raphson/IRLS logistic regression as before (standardized features per training fold, small ridge penalty for stability), plus the linear-regression-thresholded version for comparison, both run with and without the opponent feature.
 - Overall out-of-fold accuracy: 67.07% (logistic, no opponent feature) → **70.66%** (logistic, with opponent feature) → beats the pooled baseline of 55.09% by 12–16 points depending on version. Linear regression version came in slightly weaker across the board and produced more invalid (outside [0,1]) predictions when the opponent feature was added (7 of 167) — one more mark in favor of logistic regression as the right tool.
 
+## Published to GitHub
+
+The analysis (CSVs + markdown docs, not the raw screenshots — those stay local) is published at **https://github.com/CrackedPeanut34/word-hunt-analysis** (public repo).
+
 ## Full file list added this round
 
 - `word_hunt_data_combined.csv`
