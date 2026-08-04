@@ -1,0 +1,7 @@
+feature,coefficient_standardized,coefficient_raw_units
+intercept,-0.2303,-4.35667
+my_words,0.7846,0.089672
+my_words_over_800,0.0099,0.002766
+my_words_over_1400,0.073,0.087842
+my_words_over_1800,-0.0949,-0.872213
+my_avg_word_value,0.2659,0.003534
