@@ -1,0 +1,7 @@
+feature,coefficient_standardized,coefficient_raw_units,odds_ratio_per_std_dev
+intercept,2.3381,7.715727,
+my_score,6.5677,0.001525,711.7035
+my_words,-2.6116,-0.270619,0.0734
+my_words_over_800,-1.0705,-0.319622,0.3428
+my_words_over_1400,4.6071,10.014243,100.1958
+my_avg_word_value,-2.7648,-0.041268,0.063

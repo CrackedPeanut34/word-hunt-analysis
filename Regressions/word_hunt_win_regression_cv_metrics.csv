@@ -1,0 +1,3 @@
+model,n,k_folds,mean_fold_accuracy,std_fold_accuracy,overall_oof_accuracy,oof_r2,n_oof_pred_lt0,n_oof_pred_gt1
+LINEAR CV - without opponent feature,167,5,0.6657,0.0472,0.6647,0.1275,1,1
+LINEAR CV - WITH vs_opponent_2 binary feature,167,5,0.6895,0.0423,0.6886,0.1558,3,4

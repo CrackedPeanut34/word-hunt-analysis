@@ -1,0 +1,3 @@
+sign_group,games,wins,win_pct,avg_my_words,avg_opp2_words,avg_words_diff,avg_score_diff
+negative (my value < opp2),22,5,22.73,31.95,31.09,0.86,-1968.18
+positive (my value > opp2),29,24,82.76,32.97,29.59,3.38,2617.24

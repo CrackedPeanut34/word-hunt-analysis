@@ -1,0 +1,4 @@
+series,x,y,slope,intercept,r,r_squared,p_value,stderr,n
+Mine,my_words,my_score,395.07,-2772.9,0.8247,0.6801,1.0135033106067296e-13,38.704,51
+Opponent2,opp2_words,opp2_score,497.19,-5593.48,0.8015,0.6425,1.5922259072779202e-12,52.984,51
+Total,total_words,total_score,438.54,-8007.46,0.8328,0.6935,3.51831361145463e-14,41.645,51

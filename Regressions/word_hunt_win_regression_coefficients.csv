@@ -1,0 +1,8 @@
+feature,coefficient
+intercept,-0.2088
+my_score,-0.0
+my_words,0.0275
+my_words_over_800,0.0233
+my_words_over_1400,0.186
+my_words_over_2200,0.0
+my_avg_word_value,-0.0012

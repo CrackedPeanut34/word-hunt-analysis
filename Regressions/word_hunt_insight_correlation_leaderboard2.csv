@@ -1,0 +1,16 @@
+stat,correlation_with_win,p_value
+score_diff,0.716,0.0
+words_over_800_diff,0.636,0.0
+avg_word_value_diff,0.614,0.0
+words_diff,0.546,3e-05
+words_over_1400_diff,0.457,0.00074
+opp2_words_over_1400,-0.45,0.00093
+my_words,0.419,0.00219
+my_score,0.413,0.00256
+my_words_over_800,0.38,0.00599
+opp2_avg_word_value,-0.301,0.03198
+my_avg_word_value,0.262,0.06283
+opp2_score,-0.17,0.23276
+opp2_words_over_800,-0.169,0.23608
+opp2_words,0.064,0.65569
+my_words_over_1400,-0.029,0.83818

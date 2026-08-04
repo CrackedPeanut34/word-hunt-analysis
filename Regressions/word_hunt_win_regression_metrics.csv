@@ -1,0 +1,2 @@
+train_n,test_n,train_win_rate,test_win_rate,train_accuracy,test_accuracy,test_precision,test_recall,r2_train,r2_test,random_seed
+65,51,0.415,0.373,0.7385,0.7255,0.6471,0.5789,0.219,0.058,42

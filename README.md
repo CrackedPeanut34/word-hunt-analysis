@@ -1,0 +1,40 @@
+# Word Hunt Analysis
+
+A data analysis project on Word Hunt (the GamePigeon word game) results: 116 games against one opponent, 51 against a second, pooled into 167 games total. Started as raw screenshot extraction and grew into win-rate analysis, regression modeling, and a head-to-head skill comparison.
+
+**Start here:** [`Insights & Summaries/word_hunt_insights_combined.md`](Insights%20%26%20Summaries/word_hunt_insights_combined.md) — the sharpest finding in the whole project: it isn't "word value" broadly that decides these games, it's specifically the rare ≥1400-point words. Remove that tier from the picture and the author is net ahead across their entire history.
+
+## What's here
+
+Raw screenshots aren't included in this repo (they're personal photos, not analysis output) — only the extracted data and everything built on top of it.
+
+### `Insights & Summaries/`
+Narrative write-ups, in the order the project unfolded:
+- `word_hunt_summary.md` — core stats, splits, and regression for dataset 1
+- `word_hunt_insights.md` — every finding from dataset 1
+- `word_hunt_insights2.md` — dataset 2, opponent 2, with dataset-1 comparisons throughout
+- `word_hunt_insights_combined.md` — cross-dataset work: the points-origin decomposition (the headline finding), a fair three-way skill comparison, and pooled cross-validated win prediction
+- `word_hunt_process_log.md`, `word_hunt_process_log2.md`, `word_hunt_process_log_combined.md` — methodology: how each stage was built, what was double-checked, and mistakes caught along the way (a bug in a hand-rolled logistic regression, a flawed apples-to-oranges comparison that got corrected, etc.)
+
+### `Stats/`
+The working datasets and summary tables (all pandas-ready CSVs):
+- `word_hunt_stats.csv` / `word_hunt_stats2.csv` — raw extracted per-game data
+- `word_hunt_data_enriched.csv` / `_enriched2.csv` / `_combined.csv` — enriched with derived metrics (score/word differentials, average word value, high-value word rate, adjusted points, etc.)
+- `word_hunt_summary_overall*.csv`, `_by_result*.csv`, `_by_total_score_bucket*.csv` — grouped averages
+- `word_hunt_summary_by_player.csv` — the fair three-way comparison (me vs. each opponent, matchup by matchup)
+- `word_hunt_winrate_by_word_value_*.csv` — win rate split by word-value differential (the single best predictor found)
+- `word_hunt_points_origin_decomposition.csv` / `_per_game.csv` — the tier-by-tier point breakdown behind the headline finding
+- `word_hunt_insight_correlation_leaderboard*.csv`, `_opponent_tiers*.csv` — correlation ranking and opponent-strength segmentation
+
+### `Regressions/`
+Model fits and their evaluation:
+- `word_hunt_regression_words_vs_score*.csv` — simple words→score OLS fits
+- `word_hunt_win_regression_*` — linear regression predicting win/loss (flagged as the wrong tool for a binary target, kept for comparison)
+- `word_hunt_win_logistic_*` — logistic regression predicting win/loss, including a hand-rolled Newton-Raphson implementation (no sklearn available in the original environment)
+- `word_hunt_win_logistic_cv_*`, `word_hunt_win_regression_cv_*` — the pooled, 5-fold cross-validated versions of the above, evaluated on all 167 games at once instead of a single train/test split
+
+## Method notes worth knowing before trusting a number here
+
+- Word point values were extracted by reading each screenshot's results screen (only the numeric point value next to each word, never the word text itself). A handful of games have `_over_800` counts flagged as **lower bounds** rather than exact — the game's results screen only shows the top ~15 words per column, and a few games had 15+ words all worth ≥800 with more hidden off-screen.
+- Two win-prediction models exist per dataset stage: **linear regression thresholded at 0.5** (not the statistically correct tool for a binary target, but requested and kept for comparison) and **logistic regression** (the correct tool). Prefer the logistic numbers.
+- Sample size is genuinely small for classification modeling — 51 games for the second opponent gave a models that badly overfit under a single train/test split (86% train vs. 59% test accuracy). Cross-validating the pooled 167-game dataset fixed this and is the most trustworthy win-prediction result in the repo.

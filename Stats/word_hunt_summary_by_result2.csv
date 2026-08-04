@@ -1,0 +1,3 @@
+my_won,games,my_score,opp2_score,total_score,my_words,opp2_words,total_words,my_words_over_800,opp2_words_over_800,my_words_over_1400,opp2_words_over_1400,my_words_over_2200,opp2_words_over_2200,my_avg_word_value,opp2_avg_word_value,total_avg_word_value,score_diff,words_diff,words_over_800_diff,words_over_1400_diff,words_over_2200_diff,avg_word_value_diff
+not_won,22,7918.18,10277.27,18195.45,27.95,29.73,57.68,2.09,4.0,0.36,1.5,0.0,0.0,277.76,334.1,305.82,-2359.09,-1.77,-1.91,-1.14,0.0,-56.34
+won,29,11717.24,8803.45,20520.69,36.0,30.62,66.62,4.9,2.9,0.31,0.1,0.0,0.0,318.55,278.31,299.8,2913.79,5.38,2.0,0.21,0.0,40.24
