@@ -1,5 +1,9 @@
 # Word Hunt Stats Summary
 
+**Preface:** I wanted to analyze, learn from, and predict my Word Hunt games against my friends. This document (and the rest of this folder) is that project.
+
+**How the game works, briefly** (full detail with sources in the repo's `README.md`): Word Hunt is a head-to-head iMessage/GamePigeon game — both players get the same 4×4 letter grid and 80 seconds to find as many words as possible by connecting adjacent letters; higher score wins. Points depend only on word length, not letter rarity: 3 letters = 100, 4 = 400, 5 = 800, 6 = 1,400, 7 = 1,800, 8 = 2,200 (+400 per letter beyond that). Every "word value" and "tier" reference below is describing this scoring table — the ≥1400 tier specifically means 6-plus-letter words, which are rare finds but worth disproportionately more.
+
 Source: `word_hunt_data_enriched.csv` (116 games, IMG_5712–IMG_5827)
 
 **The throughline of this whole project turned out to be one derived stat: `avg_word_value` (score ÷ words) — points per word found, not raw score and not raw word count.** Every later analysis (correlation ranking, win-rate splits, the win-prediction models, and the second dataset comparison) kept landing back on this same number as the strongest single signal for winning. See `word_hunt_insights.md` for the full case, and the [Word Value Differential Distribution](https://claude.ai/code/artifact/6034b8ee-69da-403b-9e31-eeee4251e05a) chart for the picture of it.

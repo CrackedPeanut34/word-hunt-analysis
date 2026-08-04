@@ -1,8 +1,28 @@
 # Word Hunt Analysis
 
-A data analysis project on Word Hunt (the GamePigeon word game) results: 116 games against one opponent, 51 against a second, pooled into 167 games total. Started as raw screenshot extraction and grew into win-rate analysis, regression modeling, and a head-to-head skill comparison.
+I wanted to actually analyze, learn from, and predict my Word Hunt games against my friends — not just eyeball the results screen after each match and move on. This repo is that project: 116 games against one opponent, 51 against a second, pooled into 167 games total, going from raw screenshot extraction all the way to regression modeling and a head-to-head skill comparison.
 
-**Start here:** [`Insights & Summaries/word_hunt_insights_combined.md`](Insights%20%26%20Summaries/word_hunt_insights_combined.md) — the sharpest finding in the whole project: it isn't "word value" broadly that decides these games, it's specifically the rare ≥1400-point words. Remove that tier from the picture and the author is net ahead across their entire history.
+**Start here:** [`Insights & Summaries/word_hunt_insights_combined.md`](Insights%20%26%20Summaries/word_hunt_insights_combined.md) — the sharpest finding in the whole project: it isn't "word value" broadly that decides these games, it's specifically the rare ≥1400-point words. Remove that tier from the picture and I'm net ahead across my entire history.
+
+## How Word Hunt works
+
+Word Hunt is a head-to-head word game played over iMessage via the GamePigeon extension. Both players get the same randomly-generated 4×4 grid of letters and a fixed **80-second timer**. You form words by dragging across adjacent letters (including diagonals) — no letter can be reused within the same word, and the shortest valid word is 3 letters. Both players search the identical board at the same time, entirely independently; whoever ends with the higher score wins.
+
+Scoring is **based purely on word length**, not letter rarity (unlike Scrabble — a Q is worth the same as an E here):
+
+| Word length | Points |
+|---|---|
+| 3 letters | 100 |
+| 4 letters | 400 |
+| 5 letters | 800 |
+| 6 letters | 1,400 |
+| 7 letters | 1,800 |
+| 8 letters | 2,200 |
+| 9+ letters | +400 per additional letter |
+
+That scoring curve is the reason this whole project's headline finding exists: 6+ letter words (the ≥1400 tier) are worth disproportionately more than short ones, but they're also much rarer to spot on a 4×4 board under time pressure — so a player who's simply better at finding *long* words gets rewarded heavily, independent of how many total words either side finds. Every "word value," "tier," and "≥1400" reference throughout this repo's docs and CSVs is describing exactly this scoring table.
+
+*(Sources: [thewordfinder.com](https://www.thewordfinder.com/word-hunt-solver/), [Word Hunt: Cracking the Code (Medium)](https://medium.com/@abhay.khanna_37314/word-hunt-cracking-the-code-9344188b1edb), [dcode.fr Word Hunt solver](https://www.dcode.fr/word-hunt-game-pigeon-solver).)*
 
 ## What's here
 
