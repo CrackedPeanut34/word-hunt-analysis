@@ -1,0 +1,9 @@
+stat,dataset1_mean,dataset3_mean,change,pct_change,t_stat,p_value,significant_at_05
+my_score,10506.897,11461.905,955.008,9.09,-1.33,0.1861,False
+my_words,34.414,34.302,-0.112,-0.33,0.078,0.9376,False
+my_words_over_800,3.853,4.762,0.908,23.58,-1.603,0.1114,False
+my_words_over_1400,0.397,0.81,0.413,104.14,-2.425,0.0173,True
+my_words_over_1800,0.009,0.032,0.023,268.25,-0.969,0.3357,False
+my_words_over_2200,0.0,0.0,0.0,,,,False
+my_avg_word_value,298.975,326.086,27.11,9.07,-2.258,0.0257,True
+my_hv_rate,0.106,0.13,0.024,22.82,-1.787,0.0764,False
