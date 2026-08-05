@@ -39,7 +39,8 @@ Exactly three documents, each with a different job:
 - **`word_hunt_summary.md`** — the narrative: how the data came in, why the first opponent was winning, what turned out to explain it, what changed against a second opponent, what held up, the strategy change and its result, and an honest read on how well any of this can be predicted.
 - **`word_hunt_insights_combined.md`** — every individual finding from the whole project in one place, ordered from simplest to most involved.
 - **`word_hunt_process_log.md`** — the methodology: every extraction pass, every derived column, every model, with the actual Python behind each step, and the mistakes caught along the way (a sign error in a hand-rolled logistic regression, a flawed apples-to-oranges comparison, a model that got *worse* with more data).
-- Also here: the three `word_hunt_regression_words_vs_score*.csv` files (simple words→score OLS fits — small enough to live alongside the docs rather than in `Stats/`).
+
+Only these three files live here — every CSV, including the simple regression fits, is under `Stats/` or `Regressions/` instead.
 
 ### `Stats/`
 The working datasets and summary tables (all pandas-ready CSVs):
@@ -54,6 +55,7 @@ The working datasets and summary tables (all pandas-ready CSVs):
 
 ### `Regressions/`
 Model fits and their evaluation, including several dead ends kept for the record:
+- `word_hunt_regression_words_vs_score*.csv` — simple words→score OLS fits (mine/opponent's/total), one per dataset
 - `word_hunt_win_regression_*` — linear regression predicting win/loss (flagged as the wrong tool for a binary target, kept for comparison)
 - `word_hunt_win_logistic_*` — logistic regression predicting win/loss, hand-rolled via Newton-Raphson (no sklearn available in the working environment)
 - `word_hunt_win_logistic_cv_*` — pooled, 5-fold cross-validated versions, evaluated on all games at once instead of a single train/test split
