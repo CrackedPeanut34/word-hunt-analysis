@@ -1,0 +1,7 @@
+feature,coefficient_raw
+intercept,-3.605466
+my_words,0.064982
+my_words_over_800,0.034139
+my_words_over_1400,-0.055536
+my_words_over_1800,-0.630825
+my_avg_word_value,0.00349
