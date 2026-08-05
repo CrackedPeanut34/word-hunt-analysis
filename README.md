@@ -43,24 +43,18 @@ Exactly three documents, each with a different job:
 Only these three files live here — every CSV, including the simple regression fits, is under `Stats/` or `Regressions/` instead.
 
 ### `Stats/`
-The working datasets and summary tables (all pandas-ready CSVs):
-- `word_hunt_stats.csv` / `_stats2.csv` / `_stats3.csv` — raw extracted per-game data
-- `word_hunt_data_enriched.csv` / `_enriched2.csv` / `_enriched3.csv` / `_combined.csv` — enriched with derived metrics (score/word differentials, average word value, high-value word rate, adjusted points, etc.)
-- `word_hunt_summary_overall*.csv`, `_by_result*.csv`, `_by_total_score_bucket*.csv` (plus opponent-1-all and all-opponents combined versions), `_by_my_score_bucket_all_opponents.csv` — grouped averages
-- `word_hunt_summary_by_player.csv` — the fair three-way comparison (me vs. each opponent, matchup by matchup)
-- `word_hunt_winrate_by_word_value_*.csv`, `_by_hv_rate_sign*.csv` — win rate split by word-value and high-value-rate differentials
-- `word_hunt_points_origin_decomposition.csv` / `_per_game.csv` — the tier-by-tier point breakdown behind the headline finding
-- `word_hunt_insight_correlation_leaderboard*.csv`, `_opponent_tiers*.csv` — correlation ranking and opponent-strength segmentation
-- `word_hunt_dataset1_vs_dataset3_own_stats_comparison.csv` — the before/after strategy-change test
+The working datasets and summary tables (all pandas-ready CSVs), split into four subfolders by granularity:
+- **`Per-Game Data/`** — one row per game. `word_hunt_stats.csv` / `_stats2.csv` / `_stats3.csv` (raw extraction) and `word_hunt_data_enriched.csv` / `_enriched2.csv` / `_enriched3.csv` / `_combined.csv` (with derived metrics: score/word differentials, average word value, high-value word rate, adjusted points, etc.)
+- **`Summary Tables/`** — one row per group. `word_hunt_summary_overall*.csv`, `_by_result*.csv`, `_by_total_score_bucket*.csv` (plus opponent-1-all, all-opponents, and my-own-score-bucket versions), and `word_hunt_summary_by_player.csv` (the fair three-way comparison, matchup by matchup)
+- **`Win-Rate Splits & Tiers/`** — win rate broken out by a specific signal. `word_hunt_winrate_by_word_value_*.csv`, `_by_hv_rate_sign*.csv`, `word_hunt_insight_opponent_tiers*.csv`
+- **`Special Analyses/`** — one-off, bespoke investigations. `word_hunt_points_origin_decomposition.csv` / `_per_game.csv` (the tier-by-tier point breakdown behind the headline finding) and `word_hunt_dataset1_vs_dataset3_own_stats_comparison.csv` (the before/after strategy-change test)
 
 ### `Regressions/`
-Model fits and their evaluation, including several dead ends kept for the record:
-- `word_hunt_regression_words_vs_score*.csv` — simple words→score OLS fits (mine/opponent's/total), one per dataset
-- `word_hunt_win_regression_*` — linear regression predicting win/loss (flagged as the wrong tool for a binary target, kept for comparison)
-- `word_hunt_win_logistic_*` — logistic regression predicting win/loss, hand-rolled via Newton-Raphson (no sklearn available in the working environment)
-- `word_hunt_win_logistic_cv_*` — pooled, 5-fold cross-validated versions, evaluated on all games at once instead of a single train/test split
-- `word_hunt_win_logistic_predictor_v2_*`, `_score_opponent_*`, `_score_only_*` — the simpler two-feature (and one-feature) models that ended up outperforming the richer ones once the full 230-game dataset was in, and that the live predictor tool actually runs on
-- `word_hunt_win_logistic_cv_score_opponent_hvrate_comparison.csv`, `_score_only_split_comparison_*` — the robustness checks (different fold seeds, different split ratios) behind that conclusion
+Model fits and their evaluation, split into four subfolders that roughly follow the modeling story in `word_hunt_process_log.md`:
+- **`Correlation & Simple Regression/`** — `word_hunt_insight_correlation_leaderboard*.csv` and `word_hunt_regression_words_vs_score*.csv`, the simplest fits in the project
+- **`Per-Dataset Win Models (v1)/`** — the original single-train/test-split linear and logistic win models, fit separately per dataset, including several dead ends kept for the record (the multicollinearity bug, the dataset-2 overfitting demonstration)
+- **`Pooled Multi-Feature CV Models/`** — the 5-fold cross-validated versions using words/tiers/avg-word-value + opponent identity, pooled across datasets, including the noscore and with-1800 variants
+- **`Score + Opponent Model (current)/`** — the simple two-feature (and one-feature) model that ended up outperforming the richer ones once the full 230-game dataset was in, plus every robustness check behind that conclusion (different fold seeds, different split ratios, the failed attempt to add ≥800 rate) and the coefficients actually deployed in the live predictor tool
 
 ## Method notes worth knowing before trusting a number here
 
