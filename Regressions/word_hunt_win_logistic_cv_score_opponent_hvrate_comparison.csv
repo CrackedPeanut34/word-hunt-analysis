@@ -1,0 +1,5 @@
+model,fold_set,mean_cv_accuracy
+score + opponent,A (seed 42),0.6832
+score + opponent,B (seed 7),0.6697
+score + opponent + 800+ rate,A (seed 42),0.6527
+score + opponent + 800+ rate,B (seed 7),0.6524
