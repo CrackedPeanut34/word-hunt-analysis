@@ -2,7 +2,7 @@
 
 I wanted to actually analyze, learn from, and predict my Word Hunt games against my friends — not just eyeball the results screen after each match and move on. This repo is that project: 116 games against one opponent, 51 against a second, then a third batch of 63 more games against the first opponent again after I deliberately changed strategy — 230 games total, going from raw screenshot extraction all the way to regression modeling and a head-to-head skill comparison.
 
-**Start here:** [`Insights & Summaries/word_hunt_summary.md`](Insights%20%26%20Summaries/word_hunt_summary.md) — the full story in the order it unfolded. Or jump straight to [`word_hunt_insights_combined.md`](Insights%20%26%20Summaries/word_hunt_insights_combined.md) for every individual finding, simplest to most involved.
+**Start here:** [`Insights & Summaries/word_hunt_summary.md`](Insights%20%26%20Summaries/word_hunt_summary.md) — the full story in the order it unfolded. Or jump straight to [`word_hunt_insights_combined.md`](Insights%20%26%20Summaries/word_hunt_insights_combined.md) for every individual finding, simple to most complex.
 
 **Try it live:** a [win-probability predictor](https://claude.ai/code/artifact/b58cd745-03d4-4486-87ea-a22224edea2a) built from the models below — enter a game in progress and it estimates your win chance, plus shows how each stat compares to your own history.
 
