@@ -1,6 +1,6 @@
 # Word Hunt Analysis
 
-I wanted to actually analyze, learn from, and predict my Word Hunt games against my friends — not just eyeball the results screen after each match and move on. This repo is that project: 116 games against one opponent, 51 against a second, pooled into 167 games total, going from raw screenshot extraction all the way to regression modeling and a head-to-head skill comparison.
+I wanted to actually analyze, learn from, and predict my Word Hunt games against my friends — not just eyeball the results screen after each match and move on. This repo is that project: 116 games against one opponent, 51 against a second, then a third batch of 63 more games against the first opponent again after I deliberately changed strategy — 230 games total, going from raw screenshot extraction all the way to regression modeling and a head-to-head skill comparison.
 
 **Start here:** [`Insights & Summaries/word_hunt_insights_combined.md`](Insights%20%26%20Summaries/word_hunt_insights_combined.md) — the sharpest finding in the whole project: it isn't "word value" broadly that decides these games, it's specifically the rare ≥1400-point words. Remove that tier from the picture and I'm net ahead across my entire history.
 
@@ -34,7 +34,8 @@ Narrative write-ups, in the order the project unfolded:
 - `word_hunt_insights.md` — every finding from dataset 1
 - `word_hunt_insights2.md` — dataset 2, opponent 2, with dataset-1 comparisons throughout
 - `word_hunt_insights_combined.md` — cross-dataset work: the points-origin decomposition (the headline finding), a fair three-way skill comparison, and pooled cross-validated win prediction
-- `word_hunt_process_log.md`, `word_hunt_process_log2.md`, `word_hunt_process_log_combined.md` — methodology: how each stage was built, what was double-checked, and mistakes caught along the way (a bug in a hand-rolled logistic regression, a flawed apples-to-oranges comparison that got corrected, etc.)
+- `word_hunt_insights3.md` — dataset 3: 63 more games against opponent 1, played after deliberately shifting strategy toward finding longer words, with a statistically-tested before/after comparison against dataset 1
+- `word_hunt_process_log.md`, `word_hunt_process_log2.md`, `word_hunt_process_log3.md`, `word_hunt_process_log_combined.md` — methodology: how each stage was built, what was double-checked, and mistakes caught along the way (a bug in a hand-rolled logistic regression, a flawed apples-to-oranges comparison that got corrected, etc.)
 
 ### `Stats/`
 The working datasets and summary tables (all pandas-ready CSVs):
