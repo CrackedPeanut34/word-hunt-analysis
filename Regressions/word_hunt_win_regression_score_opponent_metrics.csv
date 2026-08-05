@@ -1,0 +1,2 @@
+train_n,test_n,train_accuracy,test_accuracy,r2_train,r2_test,n_test_pred_lt0,n_test_pred_gt1,random_seed
+161,69,0.677,0.6957,0.1254,0.1446,0,0,42

@@ -1,0 +1,4 @@
+feature,coefficient_standardized,coefficient_raw_units,odds_ratio_per_std_dev
+intercept,-0.1596,-2.083458,
+my_score,0.7446,0.000163,2.1056
+vs_opponent_2,0.3172,0.734152,1.3733

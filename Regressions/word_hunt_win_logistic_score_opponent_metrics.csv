@@ -1,0 +1,2 @@
+train_n,test_n,train_win_rate,test_win_rate,train_accuracy,test_accuracy,baseline_majority_class_accuracy,test_precision,test_recall,mcfadden_r2_train,mcfadden_r2_test,ridge_lambda,random_seed,newton_iterations,train_split_pct
+161,69,0.46,0.42,0.6832,0.6957,0.5797,0.6429,0.6207,0.0961,0.1116,0.0001,42,5,70
