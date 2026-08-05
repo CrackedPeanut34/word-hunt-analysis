@@ -1,113 +1,65 @@
-# Word Hunt Stats Summary
+# Word Hunt — Summary
 
-**Preface:** I wanted to analyze, learn from, and predict my Word Hunt games against my friends. This document (and the rest of this folder) is that project.
+**Preface:** I wanted to actually analyze, learn from, and predict my Word Hunt games against my friends — not just eyeball the results screen after each match and move on. This is the story of what that turned up, told in the order it actually unfolded: first why I was losing, then what explained it, then what changed when a second opponent entered the picture, then what happened after I deliberately changed how I play, and finally an honest account of how well any of this can actually be predicted.
 
-**How the game works, briefly** (full detail with sources in the repo's `README.md`): Word Hunt is a head-to-head iMessage/GamePigeon game — both players get the same 4×4 letter grid and 80 seconds to find as many words as possible by connecting adjacent letters; higher score wins. Points depend only on word length, not letter rarity: 3 letters = 100, 4 = 400, 5 = 800, 6 = 1,400, 7 = 1,800, 8 = 2,200 (+400 per letter beyond that). Every "word value" and "tier" reference below is describing this scoring table — the ≥1400 tier specifically means 6-plus-letter words, which are rare finds but worth disproportionately more.
+**How the game works, briefly** (full detail in the repo's `README.md`): Word Hunt is a head-to-head iMessage/GamePigeon game — both players get the same 4×4 letter grid and 80 seconds to find as many words as possible; higher score wins. Points depend only on word length: 3 letters = 100, 4 = 400, 5 = 800, 6 = 1,400, 7 = 1,800, 8 = 2,200 (+400 per letter beyond that). A 6-plus-letter word — referred to below as a "big word" or the "≥1400 tier" — is rare to find under time pressure but worth disproportionately more than a short one.
 
-Source: `word_hunt_data_enriched.csv` (116 games, IMG_5712–IMG_5827)
+## 1. Getting the data in
 
-**The throughline of this whole project turned out to be one derived stat: `avg_word_value` (score ÷ words) — points per word found, not raw score and not raw word count.** Every later analysis (correlation ranking, win-rate splits, the win-prediction models, and the second dataset comparison) kept landing back on this same number as the strongest single signal for winning. See `word_hunt_insights.md` for the full case, and the [Word Value Differential Distribution](https://claude.ai/code/artifact/6034b8ee-69da-403b-9e31-eeee4251e05a) chart for the picture of it.
+167 of my own screenshots (later 230) of Word Hunt's post-game results screen, hand-read one at a time — score, word count, and how many words cleared each point tier, for both me and the opponent, never the actual words themselves. Three batches came in over time: 116 games against one friend ("Opponent 1"), then 51 against a second friend ("Opponent 2"), then a further 63 against Opponent 1 again, played after I'd deliberately changed how I approach the board (more on that in §6). Everything landed in a set of CSVs — raw extracted numbers, then an enriched layer adding derived stats like average point-value-per-word, then summary tables, then a handful of small regression models — all of it detailed in `word_hunt_process_log.md`.
 
-**2026-08-04 correction note:** a `words_over_1800` tier (previously silently folded into ≥1400) was audited in and backfilled across every CSV. It doesn't change anything below. Full audit in `word_hunt_process_log_combined.md` § 0.
+## 2. Opponent 1 was better than me — and it wasn't about who found more words
 
-## Record
-- **Win %:** 39.66% (40.00% excluding the one draw)
-- **Record:** 46 W – 69 L – 1 D
+Against Opponent 1, my record was 46–69–1: a 39.66% win rate. The surprising part is *why* he was ahead. I actually found slightly **more** total words per game than he did (34.41 vs. 32.91) — so this was never a story about him outworking me. What he had was quality: he found more words worth ≥800 points (4.99 vs. my 3.85/game) and dramatically more worth ≥1400 (1.17 vs. my 0.40/game, nearly 3× the rate). He wasn't playing a bigger volume game — he was finding *bigger* words.
 
-## Overall averages (per game)
+## 3. The "how": word value turned out to be nearly the whole story
 
-| Metric | Mine | Opponent | Total |
+Once "average word value" (points per word found, not raw score) got isolated as its own number, it explained almost everything else. Split every game by whether my average word value beat the opponent's that game: I won **87.5%** of the time when it did (28 of 32 games), and only **21.4%** of the time when it didn't (18 of 84 games). Bucketed more finely, it's close to a step function — win rate climbs smoothly from 0% at the worst word-value deficits to 100% at the biggest edges. It's also the single strongest correlate of winning across every dataset in this project (r ≈ 0.6, replicated against a completely different opponent later).
+
+A couple of honest caveats belong right here, not buried later:
+- **Word value is partly derived from score itself** (it's score ÷ words), so this isn't a fully independent explanation of winning — it's close to restating the outcome in different units. It's still a genuinely useful lens (it separates "found more words" from "found better words," which raw score can't do), just not an outside cause.
+- **This assumes the two players' words are roughly comparable in difficulty within a game** (same board, so in principle yes) — but that assumption has never actually been tested directly, e.g. by bucketing games by how word-value-rich the board was overall and checking whether the relationship holds the same way in generous boards as in stingy ones. That test is still on the to-do list.
+- **The flip side is worth naming too:** my style — finding more total words even when they're not individually as valuable — does get me out of jams. There are real games in the lower word-value buckets that I still won on volume alone, wins I "shouldn't" have had on word quality terms. It's not a large effect, but it's there, and it's part of why word value is the dominant story rather than the *only* one.
+
+## 4. Then Opponent 2 arrived, and the story replicated — with an easier matchup
+
+Against Opponent 2, my record flipped to 56.86% (29–22). Every mechanic from §2–3 held up: word value differential was still the top correlate (r ≈ 0.61, nearly identical effect size to Opponent 1), and the win-rate-by-word-value-edge split looked almost the same shape (82.8% win rate when ahead, 22.7% when behind). What was different wasn't the *rules of the game* — it was how close the matchup was. My average word value against Opponent 2 was 300.96, hers was 302.38 — a gap of just 1.4 points, compared to a real, persistent ~44-point gap against Opponent 1. I live in a world of much closer word-value games against her, and that's the entire reason winning came easier: not a different game, an easier one.
+
+## 5. What didn't change — and got backed up, not just repeated
+
+A handful of findings from the Opponent 1 data held up essentially unchanged once Opponent 2's games came in, which is worth treating as confirmation rather than coincidence:
+- **No session-order trend.** Neither dataset shows any drift in performance across the order games were played (r ≈ 0 both times) — no warm-up effect, no fatigue effect.
+- **No volume/quality tradeoff.** Finding more words doesn't cost word quality — the correlation between word count and average word value is mildly *positive* in both datasets, not negative.
+- **Streak behavior is nearly identical** — average streak length 2.04 games in both datasets, despite very different overall win rates.
+- **I'm the more consistent player on word quality, in both datasets** — my average-word-value volatility is lower than either opponent's, even though my raw score is comparably volatile to theirs.
+- **The opponent-strength-tier effect points the same direction against both opponents** (win rate drops as the opponent's word value that game rises) — just steeper against Opponent 1 (53.85%→20.51% weak-to-strong) than Opponent 2 (64.71%→47.06%).
+
+## 6. Then I changed strategy — and it's a real, if partial, story
+
+At some point I deliberately shifted from "find as many words as possible" toward "prioritize finding longer words." The next 63 games against Opponent 1 (dataset 3) let me test this properly, dataset 1 vs. dataset 3, with actual significance tests rather than eyeballing averages:
+
+| | Before | After | Statistically real? |
 |---|---|---|---|
-| Score | 10,506.9 | 11,482.8 | 21,989.7 |
-| Words | 34.41 | 32.91 | 67.33 |
-| Avg word value (score ÷ words) | 298.98 | 343.11 | 321.07 |
-| Words ≥800 | 3.85 | 4.99 | — |
-| Words ≥1400 | 0.40 | 1.17 | — |
-| Words ≥2200 | 0.00 | 0.03 | — |
+| My words ≥1400/game | 0.40 | 0.81 (≈2×) | **Yes** (p=0.017) |
+| My avg word value | 298.98 | 326.09 (+9%) | **Yes** (p=0.026) |
+| My total words found | 34.41 | 34.30 (flat) | — (unchanged, as intended) |
+| Win rate vs. Opponent 1 | 39.66% | 44.44% | Not yet (p=0.53) |
+| Score differential | −975.9 | −296.8 | Not yet (p=0.21) |
 
-## Average differentials (mine − opponent, per game)
+The behavior change is real and it's exactly what was intended — nearly double the big-word rate, a genuine jump in average word value, with total word count staying flat (I didn't just find more of everything). The downstream payoff — win rate, score gap — moved the right direction too, but at only 63 games neither is statistically distinguishable from noise yet. One honest confound: the boards in dataset 3 may simply have run a bit richer on average (total combined word value trended up too, p=0.088), so part of the shift isn't cleanly attributable to me alone. Verdict: **the strategy change measurably worked in the way it was supposed to (finding better words without sacrificing volume); whether it's paying off in wins is still an open question, not a closed one.**
 
-| Stat | Avg Diff |
-|---|---|
-| Score | −975.86 |
-| Words | +1.50 |
-| Avg word value | −44.13 |
-| Words ≥800 | −1.14 |
-| Words ≥1400 | −0.78 |
-| Words ≥2200 | −0.03 |
+## 7. Models: partly figured out, partly still not
 
-Takeaway: you typically find *more total words* than opponents but *fewer high-value ones*, and each of your words is worth ~44 points less on average — that gap in word value (driven by the ≥800/≥1400 tiers) is basically the whole story behind the average score deficit. The [distribution of this gap](https://claude.ai/code/artifact/6034b8ee-69da-403b-9e31-eeee4251e05a) across all 116 games shows it's not a few outlier blowouts — most individual games sit on the negative side.
+Predicting wins turned out to be a genuinely harder problem than finding what correlates with them, and the honest state of it is a mix of real progress and real limits.
 
-## Averages grouped by result
+**What went wrong first:** the first multi-feature models (score, word count, tier counts, average word value, all together) suffered from a structural problem — score is just words × avg-word-value by definition, so putting all three in one regression let the fit swing unstably between them, occasionally producing backwards predictions (more score sometimes predicting a *lower* win chance). Dropping score from that feature list fixed the instability without costing meaningful accuracy.
 
-| Stat | Not Won (n=70) | Won (n=46) |
-|---|---|---|
-| My score | 9,241.4 | 12,432.6 |
-| My words | 31.8 | 38.4 |
-| My avg word value | 284.3 | 321.3 |
-| My words ≥800 | 3.11 | 4.98 |
-| My words ≥1400 | 0.26 | 0.61 |
-| My words ≥2200 | 0.00 | 0.00 |
-| Opp score | 12,324.3 | 10,202.2 |
-| Opp words | 33.2 | 32.4 |
-| Opp avg word value | 365.3 | 309.4 |
-| Opp words ≥800 | 5.77 | 3.80 |
-| Opp words ≥1400 | 1.56 | 0.59 |
-| Opp words ≥2200 | 0.06 | 0.00 |
-| Total score | 21,565.7 | 22,634.8 |
-| Total words | 65.06 | 70.78 |
-| **Score diff** | **−3,082.9** | **+2,230.4** |
-| Words diff | −1.40 | +5.91 |
-| Avg word value diff | −80.97 | +11.93 |
-| Words ≥800 diff | −2.66 | +1.17 |
-| Words ≥1400 diff | −1.30 | +0.02 |
-| Words ≥2200 diff | −0.06 | 0.00 |
+**What happened when the strategy-change data got folded in:** re-fitting that same multi-feature model on the full 230-game history actually made it *worse* under honest cross-validation (63.6–64.4% accuracy, down from 68.26/66.47% on the smaller, pre-strategy-change dataset) — more data didn't help this model, because the strategy shift changed the relationship between the features and winning.
 
-Wins aren't just "more words" — your avg word value flips from *below* the opponent's when you lose (284 vs 365) to *above* it when you win (321 vs 309). Winning tracks word quality at least as much as word count.
+**What actually works best right now, on the full data:** a far simpler model — just my score and which opponent I'm facing — cross-validates at **~67–68% accuracy**, reliably beating a ~58% baseline by about 10 points, confirmed stable across two independently-shuffled 5-fold splits. Adding the ≥800 word-value rate as a third feature was tested and made it *worse*, not better, on two separate fold assignments — likely the same score-redundancy problem in a milder form. So: not a solved problem, but not "no idea" either. The honest state is "a simple, real, modest edge — roughly 10 points better than a coin flip weighted by base rates — with several more complex attempts tried and found not to help." The front-end predictor tool runs on this simpler model today, and shows a percentile breakdown against personal history for everything else that was collected but didn't make the final model.
 
-## Averages grouped by total-score bucket
+## Where the rest of the detail lives
 
-Buckets match the histogram (combined total_score = mine + opponent's, per game).
-
-| Bucket | Games | Win % | My Score | Opp Score | Total Score | My Words | Opp Words | Total Words | My Avg Value | Opp Avg Value | Score Diff | Words Diff | Avg Value Diff |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 4k–8k | 1 | 0.00% | 2,400.0 | 3,100.0 | 5,500.0 | 15.0 | 16.0 | 31.0 | 160.00 | 193.75 | −700.0 | −1.00 | −33.75 |
-| 8k–12k | 9 | 44.44% | 5,111.1 | 5,355.6 | 10,466.7 | 24.4 | 24.3 | 48.8 | 208.67 | 222.58 | −244.4 | +0.11 | −13.91 |
-| 12k–16k | 16 | 37.50% | 7,006.3 | 7,193.8 | 14,200.0 | 29.0 | 26.2 | 55.2 | 242.17 | 274.59 | −187.5 | +2.81 | −32.42 |
-| 16k–20k | 28 | 32.14% | 8,553.6 | 9,750.0 | 18,303.6 | 33.5 | 32.5 | 66.0 | 260.40 | 307.32 | −1,196.4 | +0.96 | −46.92 |
-| 20k–24k | 24 | 41.67% | 10,658.3 | 11,529.2 | 22,187.5 | 34.7 | 33.2 | 67.9 | 309.78 | 349.37 | −870.8 | +1.50 | −39.59 |
-| 24k–28k | 19 | 42.11% | 12,110.5 | 14,021.1 | 26,131.6 | 35.5 | 37.6 | 73.1 | 343.81 | 376.43 | −1,910.5 | −2.11 | −32.62 |
-| 28k–32k | 5 | 40.00% | 14,440.0 | 16,240.0 | 30,680.0 | 41.0 | 37.8 | 78.8 | 356.20 | 430.50 | −1,800.0 | +3.20 | −74.30 |
-| 32k–36k | 6 | 66.67% | 16,900.0 | 17,466.7 | 34,366.7 | 43.0 | 38.2 | 81.2 | 398.80 | 472.85 | −566.7 | +4.83 | −74.05 |
-| 36k–40k | 5 | 40.00% | 19,060.0 | 20,140.0 | 39,200.0 | 46.0 | 41.8 | 87.8 | 416.00 | 487.42 | −1,080.0 | +4.20 | −71.43 |
-| 40k–44k | 3 | 33.33% | 21,333.3 | 20,933.3 | 42,266.7 | 51.7 | 38.3 | 90.0 | 418.78 | 547.21 | +400.0 | +13.33 | −128.43 |
-
-Words≥800/≥1400/≥2200 and their diffs per bucket are in the CSV (omitted above for table width).
-
-Notes:
-- Win % doesn't trend cleanly with total score — 32k–36k is your best bucket (66.7%) but it's only 6 games.
-- Avg word value diff is negative in **every single bucket** — even the 40k–44k bucket where you win the score race overall (+400 diff) does so on raw word *count* (you find 51.7 vs their 38.3), not word quality — opponents' avg word value stays higher than yours across the entire score range, and the gap actually widens at the top (−128 diff in 40k–44k, the worst of any bucket).
-
-## Linear regression: words → score
-
-Simple OLS, `score = slope * words + intercept`, n=116 games per fit.
-
-| Series | Equation | R² | r | p-value |
-|---|---|---|---|---|
-| Mine | score = 412.44 × words − 3,686.71 | 0.653 | 0.808 | 5.7e-28 |
-| Opponent | score = 468.59 × words − 3,940.46 | 0.480 | 0.692 | 7.3e-18 |
-| Total | score = 455.22 × words − 8,659.11 | 0.585 | 0.765 | 1.8e-23 |
-
-Takeaways:
-- Word count explains score well for you (R²=0.65) — each additional word is worth ~412 points on average.
-- It explains opponent score less well (R²=0.48) — a wider spread, consistent with them finding more high-value (800+/1400+) words per game so their score depends more on word *quality* than *quantity* relative to you (matches the avg-word-value gap above: opponents average ~343 pts/word vs your ~299).
-- All three fits are highly significant (p ≪ 0.001), so the relationships aren't noise, just varying in how tightly score tracks word count.
-
-## Files
-- `word_hunt_stats.csv` — original per-game raw data (my/opp score, words, tier counts, won flag, notes)
-- `word_hunt_data_enriched.csv` — full working dataset: adds `total_score`, `total_words`, `my_avg_word_value`, `opp_avg_word_value`, `total_avg_word_value`, and 6 differential columns (`score_diff`, `words_diff`, `words_over_800_diff`, `words_over_1400_diff`, `words_over_2200_diff`, `avg_word_value_diff`)
-- `word_hunt_summary_overall.csv` — single-row overall averages/win rate, incl. total_words and avg_word_value (pandas-ready)
-- `word_hunt_summary_by_result.csv` — averages grouped by won/not-won, incl. total_words, avg_word_value, and all diffs (pandas-ready)
-- `word_hunt_summary_by_total_score_bucket.csv` — averages grouped by total-score histogram bucket, incl. total_words, avg_word_value, and all diffs (pandas-ready)
-- `word_hunt_regression_words_vs_score.csv` — linear regression stats (slope, intercept, r, R², p-value) for mine/opponent/total
-- `word_hunt_summary.md` — this file
+- `word_hunt_process_log.md` — every extraction pass, every CSV, every model, with the actual Python behind it
+- `word_hunt_insights_combined.md` — every individual finding from the whole project, in one place, simple to complex
+- The full data (`Stats/`, `Regressions/`) — nothing above is asserted without a CSV backing it up
