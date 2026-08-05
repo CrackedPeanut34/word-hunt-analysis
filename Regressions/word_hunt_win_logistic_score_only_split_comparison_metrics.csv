@@ -1,0 +1,4 @@
+split,train_n,test_n,train_win_rate,test_win_rate,train_accuracy,test_accuracy,baseline_majority_class_accuracy,test_precision,test_recall,mcfadden_r2_test,newton_iterations
+75/25,172,58,0.471,0.379,0.6628,0.6724,0.6207,0.5789,0.5,0.0247,5
+80/20,184,46,0.467,0.37,0.663,0.6739,0.6304,0.5625,0.5294,-0.0067,5
+85/15,196,34,0.464,0.353,0.6582,0.6471,0.6471,0.5,0.5,-0.0684,5

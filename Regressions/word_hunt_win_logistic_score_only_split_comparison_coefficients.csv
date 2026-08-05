@@ -1,0 +1,4 @@
+split,intercept_raw,my_score_coef_raw,my_score_odds_ratio_per_std_dev
+75/25,-2.000464,0.00017436,2.2183
+80/20,-2.034383,0.00017788,2.2491
+85/15,-2.107323,0.00018319,2.2859
