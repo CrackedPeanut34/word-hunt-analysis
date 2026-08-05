@@ -1,4 +1,4 @@
-opp_tier,games,wins,avg_opp_word_value,avg_my_word_value,win_pct
-weak opponent,39,21,246.7,242.2,53.85
-mid opponent,38,17,329.8,303.9,44.74
-strong opponent,39,8,452.4,350.9,20.51
+opp_tier,games,wins,avg_opp_word_value,avg_my_word_value,win_pct,avg_my_words_over_800,avg_opp_words_over_800,avg_my_words_over_1400,avg_opp_words_over_1400,avg_my_words_over_1800,avg_opp_words_over_1800,avg_my_words_over_2200,avg_opp_words_over_2200,avg_my_hv_rate,avg_opp_hv_rate,avg_my_words_over_1400_rate,avg_opp_words_over_1400_rate
+weak opponent,39,21,246.711,242.237,53.85,1.744,1.59,0.179,0.154,0.0,0.0,0.0,0.0,0.0534,0.0532,0.0051,0.0044
+mid opponent,38,17,329.832,303.909,44.74,3.842,4.526,0.342,0.632,0.0,0.0,0.0,0.0,0.1023,0.1306,0.0098,0.0191
+strong opponent,39,8,452.438,350.907,20.51,5.974,8.846,0.667,2.718,0.026,0.436,0.0,0.103,0.1616,0.2534,0.019,0.081

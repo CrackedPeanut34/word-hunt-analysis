@@ -1,3 +1,3 @@
-sign_group,games,wins,win_pct,avg_my_words,avg_opp2_words,avg_words_diff,avg_score_diff
-negative (my value < opp2),22,5,22.73,31.95,31.09,0.86,-1968.18
-positive (my value > opp2),29,24,82.76,32.97,29.59,3.38,2617.24
+sign_group,games,wins,win_pct,avg_my_words,avg_opp2_words,avg_words_diff,avg_score_diff,avg_my_words_over_800,avg_opp2_words_over_800,avg_my_words_over_1400,avg_opp2_words_over_1400,avg_my_words_over_1800,avg_opp2_words_over_1800,avg_my_words_over_2200,avg_opp2_words_over_2200,avg_my_hv_rate,avg_opp2_hv_rate,avg_my_words_over_1400_rate,avg_opp2_words_over_1400_rate
+negative (opp word value higher or equal),22,5,22.73,31.95,31.09,0.86,-1968.18,2.545,4.545,0.227,1.364,0.0,0.227,0.0,0.0,0.0774,0.1399,0.0063,0.0423
+positive (my word value higher),29,24,82.76,32.97,29.59,3.38,2617.24,4.552,2.483,0.414,0.207,0.034,0.034,0.0,0.0,0.1242,0.0759,0.0132,0.0057

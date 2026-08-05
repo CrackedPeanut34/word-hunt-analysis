@@ -1,6 +1,6 @@
-entity,games,win_pct,avg_score,avg_words,avg_word_value,avg_hv_rate_pct,avg_words_over_1800,avg_score_share_pct,avg_adjusted_points,note
-Me (vs Opponent 1),116,39.66,10506.9,34.41,298.98,10.58,0.009,47.71,-487.93,
-Opponent 1,116,59.48,11482.76,32.91,343.11,14.58,0.147,52.29,487.93,
-Me (vs Opponent 2),51,56.86,10078.43,32.53,300.96,10.4,0.02,51.51,319.61,
-Opponent 2,51,43.14,9439.22,30.24,302.38,10.35,0.118,48.49,-319.61,
-Me — Overall (both opponents combined),167,44.91,10376.05,33.84,299.58,10.52,0.012,48.87,-241.32,"Blended across two different opponents/board sets -- use the per-matchup rows above for head-to-head comparison, not this one"
+entity,games,win_pct,avg_score,avg_words,avg_word_value,avg_hv_rate_pct,avg_words_over_1400_rate_pct,avg_words_over_1800,avg_score_share_pct,avg_adjusted_points,note
+Me (vs Opponent 1),116,39.66,10506.9,34.41,298.98,10.58,1.13,0.009,47.71,-487.93,
+Opponent 1,116,59.48,11482.76,32.91,343.11,14.58,3.5,0.147,52.29,487.93,
+Me (vs Opponent 2),51,56.86,10078.43,32.53,300.96,10.4,1.02,0.02,51.51,319.61,
+Opponent 2,51,43.14,9439.22,30.24,302.38,10.35,2.15,0.118,48.49,-319.61,
+Me — Overall (both opponents combined),167,44.91,10376.05,33.84,299.58,10.52,1.1,0.012,48.87,-241.32,"Blended across two different opponents/board sets -- use the per-matchup rows above for head-to-head comparison, not this one"

@@ -1,14 +1,19 @@
 stat,correlation_with_win,p_value
 score_diff,0.779,0.0
 words_over_800_diff,0.701,0.0
+hv_rate_diff,0.563,0.0
 avg_word_value_diff,0.555,0.0
 words_diff,0.511,2e-05
 words_over_1400_diff,0.407,0.00094
+words_over_1400_rate_diff,0.366,0.00316
 opp_words_over_1400,-0.332,0.0079
 opp_avg_word_value,-0.329,0.00842
 opp_score,-0.326,0.00913
+opp_words_over_1400_rate,-0.315,0.012
 opp_words_over_800,-0.311,0.01318
+opp_hv_rate,-0.3,0.0168
 my_words_over_800,0.278,0.02731
+my_hv_rate,0.265,0.03581
 my_score,0.246,0.05214
 my_avg_word_value,0.216,0.0894
 my_words,0.205,0.10753
@@ -16,4 +21,5 @@ opp_words,-0.18,0.15876
 words_over_1800_diff,0.138,0.28211
 opp_words_over_1800,-0.132,0.30396
 my_words_over_1400,0.088,0.49159
+my_words_over_1400_rate,0.072,0.57323
 my_words_over_1800,0.02,0.87486
