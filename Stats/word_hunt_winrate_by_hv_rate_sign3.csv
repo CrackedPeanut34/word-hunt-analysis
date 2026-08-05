@@ -1,0 +1,3 @@
+sign_group,games,wins,win_pct,avg_my_hv_rate,avg_opp_hv_rate,avg_hv_rate_diff,avg_my_words_over_1400_rate,avg_opp_words_over_1400_rate,avg_score_diff
+negative (opp 800+ rate higher or equal),42,9,21.43,0.1092,0.1917,-0.0825,0.0186,0.0523,-1792.86
+positive (my 800+ rate higher),21,19,90.48,0.1713,0.09,0.0813,0.0305,0.0108,2695.24
